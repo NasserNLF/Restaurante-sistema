@@ -9,6 +9,7 @@ import com.triersistemas.restaurante.service.RestauranteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -47,6 +48,13 @@ public class MesaServiceImpl implements MesaService {
     @Override
     public MesaEntity getMesaEntity(Long id) {
         return mesaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("ERRO: Mesa não existe"));
+    }
+
+
+    //TODO Perguntar amanhã aula sobre como fazer subselect
+    @Override
+    public List<MesaDto> getMesasDisponiveisByDataByQtdPessoas(LocalDate data, Integer qtdPessoas, Long idRestaurante) {
+        return mesaRepository.findMesasDisponiveis(data, qtdPessoas, idRestaurante).stream().map(MesaDto::new).toList();
     }
 
     @Override

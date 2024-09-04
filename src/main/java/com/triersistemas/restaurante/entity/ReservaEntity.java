@@ -47,19 +47,14 @@ public class ReservaEntity {
         this.id = reservaDto.getId();
         this.cliente = cliente;
         this.mesa = mesaEntity;
-        this.dataReserva = reservaDto.getDataReserva();
+        this.dataReserva = validaDataReserva(reservaDto.getDataReserva());
         this.quantidadePessoas = reservaDto.getQuantidadePessoas();
         this.status = reservaDto.getStatus();
         this.observacao = reservaDto.getObservacao();
     }
 
-    public ReservaEntity putRegistro(ReservaDto reservaDto, ClienteEntity clienteEntity, MesaEntity mesaEntity) {
-        this.cliente = clienteEntity;
-        this.mesa = mesaEntity;
-        this.dataReserva = reservaDto.getDataReserva();
-        this.quantidadePessoas = reservaDto.getQuantidadePessoas();
-        this.status = reservaDto.getStatus();
-        this.observacao = reservaDto.getObservacao();
+    public ReservaEntity putRegistro(StatusReservaEnum status) {
+        this.status = status;
 
         return this;
     }

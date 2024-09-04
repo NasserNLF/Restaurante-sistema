@@ -3,12 +3,14 @@ package com.triersistemas.restaurante.service.impl;
 import com.triersistemas.restaurante.dto.PedidoDto;
 import com.triersistemas.restaurante.entity.PedidoEntity;
 import com.triersistemas.restaurante.entity.ReservaEntity;
+import com.triersistemas.restaurante.enuns.StatusReservaEnum;
 import com.triersistemas.restaurante.repository.PedidoRepository;
 import com.triersistemas.restaurante.service.PedidoService;
 import com.triersistemas.restaurante.service.ReservaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -23,6 +25,9 @@ public class PedidoServiceImpl implements PedidoService {
     @Override
     public PedidoDto postPedido(PedidoDto pedidoDto) {
         var reservaEntity = getReserva(pedidoDto.getReservaId());
+
+        validaReserva(reservaEntity);
+
         var pedidoEntity = pedidoRepository.save(new PedidoEntity(pedidoDto, reservaEntity));
 
         return new PedidoDto(pedidoEntity);
@@ -58,6 +63,12 @@ public class PedidoServiceImpl implements PedidoService {
 
     public ReservaEntity getReserva(Long id) {
         return reservaService.getReservaEntity(id);
+    }
+
+    public void validaReserva(ReservaEntity reservaEntity) {
+        if (reservaEntity.getDataReserva().isBefore(LocalDate.now()) && reservaEntity.getStatus().compareTo(StatusReservaEnum.AGENDADA) != 0) {
+            throw new IllegalArgumentException("ERRO: Você não inserir pedidos nessa reserva!");
+        }
     }
 
 }

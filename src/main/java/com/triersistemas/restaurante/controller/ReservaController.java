@@ -2,6 +2,7 @@ package com.triersistemas.restaurante.controller;
 
 import com.triersistemas.restaurante.dto.PedidoDto;
 import com.triersistemas.restaurante.dto.ReservaDto;
+import com.triersistemas.restaurante.enuns.StatusReservaEnum;
 import com.triersistemas.restaurante.service.ReservaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -46,9 +47,9 @@ public class ReservaController {
 
     //PUT
     @PutMapping("/{id}")
-    public ResponseEntity<?> putReserva(@PathVariable Long id, @RequestBody ReservaDto reservaDto) {
+    public ResponseEntity<?> putReservaStatus(@PathVariable Long id, @RequestParam StatusReservaEnum status) {
         try {
-            return ResponseEntity.ok(reservaService.putReserva(id, reservaDto));
+            return ResponseEntity.ok(reservaService.putReservaStatus(id, status));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }

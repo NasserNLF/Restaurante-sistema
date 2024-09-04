@@ -2,6 +2,7 @@ package com.triersistemas.restaurante.service;
 
 import com.triersistemas.restaurante.dto.ReservaDto;
 import com.triersistemas.restaurante.entity.ReservaEntity;
+import com.triersistemas.restaurante.enuns.StatusReservaEnum;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface ReservaService {
 
     ReservaEntity getReservaEntity(Long id);
 
-    ReservaDto putReserva(Long id, ReservaDto reservaDto);
+    ReservaDto putReservaStatus(Long id, StatusReservaEnum status);
 
     void deleteReserva(Long id);
 }

@@ -8,6 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.List;
+
 @RestController
 @RequestMapping("/mesa-controller/mesa")
 public class MesaController {
@@ -42,6 +45,11 @@ public class MesaController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
+    }
+
+    @GetMapping("/mesas-disponiveis")
+    public List<MesaDto> getMesasDisponiveis(@RequestParam LocalDate data, @RequestParam Integer numPessoas, @RequestParam Long restauranteId) {
+        return getMesasDisponiveis(data, numPessoas, restauranteId);
     }
 
     //PUT
