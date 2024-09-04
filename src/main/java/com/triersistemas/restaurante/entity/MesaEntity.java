@@ -1,6 +1,7 @@
 package com.triersistemas.restaurante.entity;
 
 
+import com.triersistemas.restaurante.dto.MesaDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,6 +20,7 @@ public class MesaEntity {
 
     @Column(nullable = false)
     private Integer numero;
+
     @Column(nullable = false)
     private Integer capacidadePessoas;
 
@@ -28,5 +30,12 @@ public class MesaEntity {
 
     @OneToMany(mappedBy = "mesa", cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
     private List<ReservaEntity> reservas;
+
+    public MesaEntity(MesaDto mesaDto, RestauranteEntity restauranteEntity) {
+        this.id = mesaDto.getId();
+        this.numero = mesaDto.getNumero();
+        this.capacidadePessoas = mesaDto.getCapacidadePessoas();
+        this.restaurante = restauranteEntity;
+    }
 
 }

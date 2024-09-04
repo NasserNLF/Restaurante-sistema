@@ -1,6 +1,7 @@
 package com.triersistemas.restaurante.entity;
 
 
+import com.triersistemas.restaurante.dto.RestauranteDto;
 import com.triersistemas.restaurante.enuns.TipoComidaEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -37,5 +38,22 @@ public class RestauranteEntity {
     private List<FuncionarioEntity> funcionarios;
 
     @OneToMany(mappedBy = "restaurante", cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
-    private  List<MesaEntity> mesas;
+    private List<MesaEntity> mesas;
+
+    public RestauranteEntity(RestauranteDto restauranteDto) {
+        this.id = restauranteDto.getId();
+        this.nome = restauranteDto.getNome();
+        this.cnpj = restauranteDto.getCnpj();
+        this.estrelas = restauranteDto.getEstrelas();
+        this.tipoComida = restauranteDto.getTipoComida();
+    }
+
+    public RestauranteEntity putRegistro(RestauranteDto atualizacao) {
+        this.nome = atualizacao.getNome();
+        this.cnpj = atualizacao.getCnpj();
+        this.estrelas = atualizacao.getEstrelas();
+        this.tipoComida = atualizacao.getTipoComida();
+
+        return this;
+    }
 }

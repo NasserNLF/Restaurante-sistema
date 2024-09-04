@@ -1,5 +1,6 @@
 package com.triersistemas.restaurante.entity;
 
+import com.triersistemas.restaurante.dto.ReservaDto;
 import com.triersistemas.restaurante.enuns.StatusReservaEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -32,17 +33,25 @@ public class ReservaEntity {
     private LocalDate dataReserva;
 
     @Column(nullable = false)
-    private Integer quantidadePessoa;
+    private Integer quantidadePessoas;
 
     @Enumerated(EnumType.ORDINAL)
     private StatusReservaEnum status;
-
-    private Integer avaliacao;
 
     private String observacao;
 
     @OneToMany(mappedBy = "reserva", cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
     private List<PedidoEntity> pedidos;
+
+    public ReservaEntity(ReservaDto reservaDto, ClienteEntity cliente, MesaEntity mesaEntity) {
+        this.id = reservaDto.getId();
+        this.cliente = cliente;
+        this.mesa = mesaEntity;
+        this.dataReserva = reservaDto.getDataReserva();
+        this.quantidadePessoas = reservaDto.getQuantidadePessoas();
+        this.status = reservaDto.getStatus();
+        this.observacao = reservaDto.getObservacao();
+    }
 
 
 }
