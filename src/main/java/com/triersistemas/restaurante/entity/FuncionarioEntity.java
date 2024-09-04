@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@NoArgsConstructor
 @Getter
 @Entity(name = "funcionario")
 public class FuncionarioEntity extends PessoaEntity {
@@ -40,6 +41,22 @@ public class FuncionarioEntity extends PessoaEntity {
         this.salario = funcionarioDto.getSalario();
         this.cargaHoraria = funcionarioDto.getCargaHoraria();
         this.restaurante = restauranteEntity;
+    }
+
+    public FuncionarioEntity putRegistro(FuncionarioDto funcionarioDto, RestauranteEntity restauranteEntity){
+        this.nome = funcionarioDto.getNome();
+        this.sobrenome = funcionarioDto.getSobrenome();;
+        this.cpf = funcionarioDto.getCpf();
+        this.dataNascimento = funcionarioDto.getDataNascimento();
+        this.sexo = funcionarioDto.getSexo();
+        this.telefone = funcionarioDto.getTelefone();
+        this.cargo = funcionarioDto.getCargo();
+        this.dataAdmissao = funcionarioDto.getDataAdmissao();
+        this.salario = funcionarioDto.getSalario();
+        this.cargaHoraria = funcionarioDto.getCargaHoraria();
+        this.restaurante = restauranteEntity;
+
+        return this;
     }
 
 

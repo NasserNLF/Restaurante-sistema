@@ -38,4 +38,12 @@ public class MesaEntity {
         this.restaurante = restauranteEntity;
     }
 
+    public MesaEntity putRegistro(MesaDto mesaDto, RestauranteEntity restauranteEntity){
+        this.numero = mesaDto.getNumero();
+        this.capacidadePessoas = mesaDto.getCapacidadePessoas();
+        this.restaurante = restauranteEntity;
+
+        return this;
+    }
+
 }

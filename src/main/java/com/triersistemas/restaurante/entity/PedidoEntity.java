@@ -34,5 +34,13 @@ public class PedidoEntity {
         this.valor = pedidoDto.getValor();
     }
 
+    public PedidoEntity putRegistro(PedidoDto pedidoDto, ReservaEntity reservaEntity){
+        this.reserva = reservaEntity;
+        this.descricao = pedidoDto.getDescricao();
+        this.valor = pedidoDto.getValor();
+
+        return this;
+    }
+
 
 }

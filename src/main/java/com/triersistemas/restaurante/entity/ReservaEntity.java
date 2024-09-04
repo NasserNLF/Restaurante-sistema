@@ -53,5 +53,16 @@ public class ReservaEntity {
         this.observacao = reservaDto.getObservacao();
     }
 
+    public ReservaEntity putRegistro(ReservaDto reservaDto, ClienteEntity clienteEntity, MesaEntity mesaEntity){
+        this.cliente = clienteEntity;
+        this.mesa = mesaEntity;
+        this.dataReserva = reservaDto.getDataReserva();
+        this.quantidadePessoas = reservaDto.getQuantidadePessoas();
+        this.status = reservaDto.getStatus();
+        this.observacao = reservaDto.getObservacao();
+
+        return this;
+    }
+
 
 }

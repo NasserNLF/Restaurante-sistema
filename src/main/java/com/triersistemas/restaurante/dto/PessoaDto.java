@@ -14,10 +14,10 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 abstract class PessoaDto {
-    private String nome;
-    private String sobrenome;
-    private String cpf;
-    private LocalDate dataNascimento;
-    private SexoEnum sexo;
-    private String telefone;
+    protected String nome;
+    protected String sobrenome;
+    protected String cpf;
+    protected LocalDate dataNascimento;
+    protected SexoEnum sexo;
+    protected String telefone;
 }

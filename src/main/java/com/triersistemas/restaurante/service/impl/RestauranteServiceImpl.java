@@ -13,7 +13,7 @@ import java.util.List;
 public class RestauranteServiceImpl implements RestauranteService {
 
     @Autowired
-    public RestauranteRepository restauranteRepository;
+    private RestauranteRepository restauranteRepository;
 
     @Override
     public RestauranteDto postRestaurante(RestauranteDto restauranteDto) {
@@ -43,12 +43,8 @@ public class RestauranteServiceImpl implements RestauranteService {
 
     @Override
     public RestauranteEntity getRestauranteEntity(Long id) {
-        var restauranteEntity = restauranteRepository.findById(id);
+        var restauranteEntity = restauranteRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("ERRO: Não existe nenhum restaurante com esse ID"));
 
-        if (restauranteEntity.isEmpty()) {
-            throw new IllegalArgumentException("ERRO: Não existe nenhum restaurante com esse ID");
-        }
-
-        return restauranteEntity.get();
+        return restauranteEntity;
     }
 }

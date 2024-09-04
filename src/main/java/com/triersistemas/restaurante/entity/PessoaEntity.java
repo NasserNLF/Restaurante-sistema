@@ -7,25 +7,27 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @MappedSuperclass
 abstract class PessoaEntity {
 
     @Column(nullable = false)
-    private String nome;
+    protected String nome;
     @Column(nullable = false)
-    private String sobrenome;
+    protected String sobrenome;
     @Column(nullable = false, unique = true)
-    private String cpf;
+    protected String cpf;
     @Column(nullable = false)
-    private LocalDate dataNascimento;
+    protected LocalDate dataNascimento;
     @Enumerated(EnumType.ORDINAL)
-    private SexoEnum sexo;
+    protected SexoEnum sexo;
     @Column(nullable = false)
-    private String telefone;
+    protected String telefone;
 
 }

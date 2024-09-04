@@ -29,8 +29,7 @@ public class ClienteDto extends PessoaDto {
         super(clienteEntity.getNome(), clienteEntity.getCpf(), clienteEntity.getSobrenome(), clienteEntity.getDataNascimento(), clienteEntity.getSexo(), clienteEntity.getTelefone());
         this.id = clienteEntity.getId();
         this.dataCadastro = clienteEntity.getDataCadastro();
-        this.quantidadeReservas = clienteEntity.getQuantidadeReservas();
-        this.quantidadeValorGasto = clienteEntity.getQuantidadeValorGasto();
+        this.quantidadeReservas = clienteEntity.getReservas().size();
         this.flgBloqueado = clienteEntity.getFlgBloqueado();
         this.restauranteId = clienteEntity.getRestaurante().getId();
     }

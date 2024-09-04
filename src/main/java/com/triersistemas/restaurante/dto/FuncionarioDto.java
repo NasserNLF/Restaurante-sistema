@@ -32,6 +32,7 @@ public class FuncionarioDto extends PessoaDto {
         this.cargo = funcionarioEntity.getCargo();
         this.dataAdmissao = funcionarioEntity.getDataAdmissao();
         this.salario = funcionarioEntity.getSalario();
+        this.cargaHoraria = funcionarioEntity.getCargaHoraria();
         this.restauranteId = funcionarioEntity.getRestaurante().getId();
 
     }

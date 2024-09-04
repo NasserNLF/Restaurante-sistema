@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -21,10 +22,7 @@ public class ClienteEntity extends PessoaEntity {
     @Column(nullable = false)
     private LocalDate dataCadastro;
 
-    private Integer quantidadeReservas;
-
     @Column(nullable = false)
-    private BigDecimal quantidadeValorGasto;
 
     private Boolean flgBloqueado;
 
@@ -33,14 +31,28 @@ public class ClienteEntity extends PessoaEntity {
     private RestauranteEntity restaurante;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
-    private List<ReservaEntity> reservas;
+    private List<ReservaEntity> reservas = new ArrayList<>();
 
     public ClienteEntity(ClienteDto clienteDto, RestauranteEntity restauranteEntity) {
         super(clienteDto.getNome(), clienteDto.getSobrenome(), clienteDto.getCpf(), clienteDto.getDataNascimento(), clienteDto.getSexo(), clienteDto.getTelefone());
         this.id = clienteDto.getId();
-        this.dataCadastro = clienteDto.getDataCadastro();
+        this.dataCadastro = LocalDate.now();
         this.flgBloqueado = (clienteDto.getFlgBloqueado() != null) ? clienteDto.getFlgBloqueado() : false;
         this.restaurante = restauranteEntity;
+    }
+
+    public ClienteEntity putRegistro(ClienteDto clienteDto, RestauranteEntity restauranteEntity) {
+        this.nome = clienteDto.getNome();
+        this.sobrenome = clienteDto.getSobrenome();
+        this.cpf = clienteDto.getCpf();
+        this.dataNascimento = clienteDto.getDataNascimento();
+        this.sexo = clienteDto.getSexo();
+        this.telefone = clienteDto.getTelefone();
+        this.flgBloqueado = (clienteDto.getFlgBloqueado() != null) ? clienteDto.getFlgBloqueado() : false;
+        this.restaurante = restauranteEntity;
+
+        return this;
+
     }
 
 }
