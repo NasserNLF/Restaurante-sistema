@@ -39,24 +39,30 @@ public class FuncionarioEntity extends PessoaEntity {
         this.cargo = funcionarioDto.getCargo();
         this.dataAdmissao = funcionarioDto.getDataAdmissao();
         this.salario = funcionarioDto.getSalario();
-        this.cargaHoraria = funcionarioDto.getCargaHoraria();
+        this.cargaHoraria = validaCargaHoraria(funcionarioDto.getCargaHoraria());
         this.restaurante = restauranteEntity;
     }
 
-    public FuncionarioEntity putRegistro(FuncionarioDto funcionarioDto, RestauranteEntity restauranteEntity){
+    public FuncionarioEntity putRegistro(FuncionarioDto funcionarioDto, RestauranteEntity restauranteEntity) {
         this.nome = funcionarioDto.getNome();
-        this.sobrenome = funcionarioDto.getSobrenome();;
-        this.cpf = funcionarioDto.getCpf();
+        this.sobrenome = funcionarioDto.getSobrenome();
         this.dataNascimento = funcionarioDto.getDataNascimento();
         this.sexo = funcionarioDto.getSexo();
         this.telefone = funcionarioDto.getTelefone();
         this.cargo = funcionarioDto.getCargo();
         this.dataAdmissao = funcionarioDto.getDataAdmissao();
         this.salario = funcionarioDto.getSalario();
-        this.cargaHoraria = funcionarioDto.getCargaHoraria();
+        this.cargaHoraria = validaCargaHoraria(funcionarioDto.getCargaHoraria());
         this.restaurante = restauranteEntity;
 
         return this;
+    }
+
+    private Integer validaCargaHoraria(Integer horas) {
+        if (horas > 220) {
+            throw new IllegalArgumentException("ERRO: Carga horária acima do limite de 220 horas");
+        }
+        return horas;
     }
 
 

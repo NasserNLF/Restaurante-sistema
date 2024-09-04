@@ -43,6 +43,7 @@ public class PedidoController {
     }
 
     //PUT
+    @PutMapping("/{id}")
     public ResponseEntity<?> putPedido(@PathVariable Long id, @RequestBody PedidoDto pedidoDto) {
         try {
             return ResponseEntity.ok(pedidoService.putPedido(id, pedidoDto));
@@ -51,5 +52,10 @@ public class PedidoController {
         }
     }
 
+    //Delete
+    @DeleteMapping("/{id}")
+    public void deletePedido(@PathVariable Long id) {
+        pedidoService.deletePedido(id);
+    }
 
 }

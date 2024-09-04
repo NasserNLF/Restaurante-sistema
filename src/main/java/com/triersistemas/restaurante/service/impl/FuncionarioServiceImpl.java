@@ -54,7 +54,12 @@ public class FuncionarioServiceImpl implements FuncionarioService {
         return new FuncionarioDto(funcionarioRepository.save(funcionarioEntity));
     }
 
-    public RestauranteEntity getRestaurante(Long id){
+    @Override
+    public void deleteFuncionario(Long id) {
+        funcionarioRepository.deleteById(id);
+    }
+
+    public RestauranteEntity getRestaurante(Long id) {
         return restauranteService.getRestauranteEntity(id);
     }
 

@@ -62,17 +62,18 @@ public class ReservaServiceImpl implements ReservaService {
         return new ReservaDto(reservaRepository.save(reservaEntity));
     }
 
-    public ClienteEntity getCliente(Long id){
+    @Override
+    public void deleteReserva(Long id) {
+        reservaRepository.deleteById(id);
+    }
+
+    public ClienteEntity getCliente(Long id) {
         return clienteService.getClienteEntity(id);
     }
 
-    public MesaEntity getMesa(Long id){
+    public MesaEntity getMesa(Long id) {
         return mesaService.getMesaEntity(id);
     }
-
-
-
-
 
 
 }

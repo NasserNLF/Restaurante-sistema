@@ -17,7 +17,7 @@ public class ClienteController {
     //POST
 
     @PostMapping
-    public ResponseEntity<?> postCliente(@RequestBody ClienteDto clienteDto){
+    public ResponseEntity<?> postCliente(@RequestBody ClienteDto clienteDto) {
         try {
             return ResponseEntity.ok(clienteService.postCliente(clienteDto));
         } catch (Exception e) {
@@ -29,7 +29,7 @@ public class ClienteController {
     //GETTER
 
     @GetMapping
-    public ResponseEntity<?> getAllClientes(){
+    public ResponseEntity<?> getAllClientes() {
         try {
             return ResponseEntity.ok(clienteService.getAllClientes());
         } catch (Exception e) {
@@ -38,7 +38,7 @@ public class ClienteController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getCliente(@PathVariable Long id){
+    public ResponseEntity<?> getCliente(@PathVariable Long id) {
         try {
             return ResponseEntity.ok(clienteService.getCliente(id));
         } catch (Exception e) {
@@ -49,12 +49,18 @@ public class ClienteController {
     //PUT
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> putCliente(@PathVariable Long id,@RequestBody ClienteDto clienteDto){
+    public ResponseEntity<?> putCliente(@PathVariable Long id, @RequestBody ClienteDto clienteDto) {
         try {
             return ResponseEntity.ok(clienteService.putCliente(id, clienteDto));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
+    }
+
+    //Delete
+    @DeleteMapping("/{id}")
+    public void deleteCliente(@PathVariable Long id) {
+        clienteService.deleteCliente(id);
     }
 
 

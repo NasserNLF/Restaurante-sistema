@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@NoArgsConstructor
 @Getter
 @Entity(name = "cliente")
 public class ClienteEntity extends PessoaEntity {
@@ -44,7 +45,6 @@ public class ClienteEntity extends PessoaEntity {
     public ClienteEntity putRegistro(ClienteDto clienteDto, RestauranteEntity restauranteEntity) {
         this.nome = clienteDto.getNome();
         this.sobrenome = clienteDto.getSobrenome();
-        this.cpf = clienteDto.getCpf();
         this.dataNascimento = clienteDto.getDataNascimento();
         this.sexo = clienteDto.getSexo();
         this.telefone = clienteDto.getTelefone();

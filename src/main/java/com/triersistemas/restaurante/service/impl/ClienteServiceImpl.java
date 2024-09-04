@@ -57,7 +57,12 @@ public class ClienteServiceImpl implements ClienteService {
         return clienteRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("ERRO: O Cliente não existe"));
     }
 
-    public RestauranteEntity getRestaurante(Long id){
+    @Override
+    public void deleteCliente(Long id) {
+        clienteRepository.deleteById(id);
+    }
+
+    public RestauranteEntity getRestaurante(Long id) {
         return restauranteService.getRestauranteEntity(id);
     }
 

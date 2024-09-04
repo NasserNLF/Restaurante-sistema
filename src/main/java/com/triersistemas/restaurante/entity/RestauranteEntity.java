@@ -50,7 +50,6 @@ public class RestauranteEntity {
 
     public RestauranteEntity putRegistro(RestauranteDto atualizacao) {
         this.nome = atualizacao.getNome();
-        this.cnpj = atualizacao.getCnpj();
         this.estrelas = atualizacao.getEstrelas();
         this.tipoComida = atualizacao.getTipoComida();
 

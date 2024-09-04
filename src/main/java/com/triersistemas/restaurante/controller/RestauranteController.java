@@ -9,23 +9,23 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/restaurante-controller")
+@RequestMapping("/restaurante-controller/restaurante")
 public class RestauranteController {
 
     @Autowired
     public RestauranteService restauranteService;
 
-    @PostMapping("/restaurante")
+    @PostMapping
     public RestauranteDto postRestaurante(@RequestBody RestauranteDto restauranteDto) {
         return restauranteService.postRestaurante(restauranteDto);
     }
 
-    @GetMapping("/restaurante")
+    @GetMapping
     public List<RestauranteDto> getAllRestaurantes() {
         return restauranteService.getAllRestaurantes();
     }
 
-    @GetMapping("/restaurante/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<?> getRestaurante(@PathVariable Long id) {
         try {
             return ResponseEntity.ok(restauranteService.getRestaurante(id));
@@ -34,7 +34,7 @@ public class RestauranteController {
         }
     }
 
-    @PutMapping("/restaurante/{id}")
+    @PutMapping("{id}")
     public ResponseEntity<?> putRestaurante(@PathVariable Long id, @RequestBody RestauranteDto restauranteDto) {
         try {
             return ResponseEntity.ok(restauranteService.putRestaurante(id, restauranteDto));
@@ -42,6 +42,12 @@ public class RestauranteController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
 
+    }
+
+    //Delete
+    @DeleteMapping("/{id}")
+    public void deleteRestaurante(@PathVariable Long id) {
+        restauranteService.deleteRestaurante(id);
     }
 
 

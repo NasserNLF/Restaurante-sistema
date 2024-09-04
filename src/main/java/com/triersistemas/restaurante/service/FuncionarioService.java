@@ -7,8 +7,14 @@ import java.util.List;
 
 public interface FuncionarioService {
     FuncionarioDto postFuncionario(FuncionarioDto funcionarioDto);
+
     List<FuncionarioDto> getAllFuncionarios();
+
     FuncionarioDto getFuncionario(Long id);
+
     FuncionarioEntity getFuncionarioEntity(Long id);
+
     FuncionarioDto putFuncionario(Long id, FuncionarioDto funcionarioDto);
+
+    void deleteFuncionario(Long id);
 }

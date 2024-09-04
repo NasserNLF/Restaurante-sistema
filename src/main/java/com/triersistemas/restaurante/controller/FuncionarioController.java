@@ -18,7 +18,7 @@ public class FuncionarioController {
     //POST
 
     @PostMapping
-    public ResponseEntity<?> postFuncionario(@RequestBody FuncionarioDto funcionarioDto){
+    public ResponseEntity<?> postFuncionario(@RequestBody FuncionarioDto funcionarioDto) {
         try {
             return ResponseEntity.ok(funcionarioService.postFuncionario(funcionarioDto));
         } catch (Exception e) {
@@ -29,7 +29,7 @@ public class FuncionarioController {
     //GET
 
     @GetMapping
-    public ResponseEntity<?> getAllFuncionarios(){
+    public ResponseEntity<?> getAllFuncionarios() {
         try {
             return ResponseEntity.ok(funcionarioService.getAllFuncionarios());
         } catch (Exception e) {
@@ -38,7 +38,7 @@ public class FuncionarioController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getFuncionario(@PathVariable Long id){
+    public ResponseEntity<?> getFuncionario(@PathVariable Long id) {
         try {
             return ResponseEntity.ok(funcionarioService.getFuncionario(id));
         } catch (Exception e) {
@@ -48,7 +48,7 @@ public class FuncionarioController {
 
     //PUT
     @PutMapping("/{id}")
-    public ResponseEntity<?> putFuncionario(@PathVariable Long id, @RequestBody FuncionarioDto funcionarioDto){
+    public ResponseEntity<?> putFuncionario(@PathVariable Long id, @RequestBody FuncionarioDto funcionarioDto) {
         try {
             return ResponseEntity.ok(funcionarioService.putFuncionario(id, funcionarioDto));
         } catch (Exception e) {
@@ -56,7 +56,11 @@ public class FuncionarioController {
         }
     }
 
-
+    //Delete
+    @DeleteMapping("/{id}")
+    public void deleteFuncionario(@PathVariable Long id) {
+        funcionarioService.deleteFuncionario(id);
+    }
 
 
 }

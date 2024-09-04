@@ -53,7 +53,7 @@ public class ReservaEntity {
         this.observacao = reservaDto.getObservacao();
     }
 
-    public ReservaEntity putRegistro(ReservaDto reservaDto, ClienteEntity clienteEntity, MesaEntity mesaEntity){
+    public ReservaEntity putRegistro(ReservaDto reservaDto, ClienteEntity clienteEntity, MesaEntity mesaEntity) {
         this.cliente = clienteEntity;
         this.mesa = mesaEntity;
         this.dataReserva = reservaDto.getDataReserva();
@@ -62,6 +62,13 @@ public class ReservaEntity {
         this.observacao = reservaDto.getObservacao();
 
         return this;
+    }
+
+    private LocalDate validaDataReserva(LocalDate dataReserva) {
+        if (dataReserva.isBefore(LocalDate.now())) {
+            throw new IllegalArgumentException("ERRO: A data da reserva não pode ser feita no passado");
+        }
+        return dataReserva;
     }
 
 

@@ -16,5 +16,7 @@ public interface RestauranteService {
 
     RestauranteDto putRestaurante(Long id, RestauranteDto restauranteDto);
 
+    void deleteRestaurante(Long id);
+
 
 }

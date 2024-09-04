@@ -54,5 +54,11 @@ public class ReservaController {
         }
     }
 
+    //Delete
+    @DeleteMapping("/{id}")
+    public void deleteReserva(@PathVariable Long id) {
+        reservaService.deleteReserva(id);
+    }
+
 
 }

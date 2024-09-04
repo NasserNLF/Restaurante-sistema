@@ -7,8 +7,14 @@ import java.util.List;
 
 public interface ReservaService {
     ReservaDto postReserva(ReservaDto reservaDto);
+
     List<ReservaDto> getAllReservas();
+
     ReservaDto getReserva(Long id);
+
     ReservaEntity getReservaEntity(Long id);
+
     ReservaDto putReserva(Long id, ReservaDto reservaDto);
+
+    void deleteReserva(Long id);
 }

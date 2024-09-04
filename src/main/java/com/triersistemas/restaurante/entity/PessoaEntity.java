@@ -30,4 +30,5 @@ abstract class PessoaEntity {
     @Column(nullable = false)
     protected String telefone;
 
+
 }

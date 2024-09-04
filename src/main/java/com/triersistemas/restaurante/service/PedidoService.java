@@ -16,5 +16,7 @@ public interface PedidoService {
 
     PedidoDto putPedido(Long id, PedidoDto pedidoDto);
 
+    void deletePedido(Long id);
+
 
 }

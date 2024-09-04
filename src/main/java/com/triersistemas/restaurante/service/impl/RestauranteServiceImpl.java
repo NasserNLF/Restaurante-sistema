@@ -42,6 +42,11 @@ public class RestauranteServiceImpl implements RestauranteService {
     }
 
     @Override
+    public void deleteRestaurante(Long id) {
+        restauranteRepository.deleteById(id);
+    }
+
+    @Override
     public RestauranteEntity getRestauranteEntity(Long id) {
         var restauranteEntity = restauranteRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("ERRO: Não existe nenhum restaurante com esse ID"));
 

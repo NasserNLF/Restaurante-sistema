@@ -4,7 +4,6 @@ import com.triersistemas.restaurante.dto.MesaDto;
 import com.triersistemas.restaurante.entity.MesaEntity;
 import com.triersistemas.restaurante.entity.RestauranteEntity;
 import com.triersistemas.restaurante.repository.MesaRepository;
-import com.triersistemas.restaurante.repository.RestauranteRepository;
 import com.triersistemas.restaurante.service.MesaService;
 import com.triersistemas.restaurante.service.RestauranteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +24,9 @@ public class MesaServiceImpl implements MesaService {
     @Override
     public MesaDto postMesa(MesaDto mesaDto) {
         var restaurante = getRestaurante(mesaDto.getIdRestaurante());
+
+        verificaExistenciaNumMesa(mesaDto.getNumero(), restaurante);
+
         var mesaEntity = mesaRepository.save(new MesaEntity(mesaDto, restaurante));
 
         return new MesaDto(mesaEntity);
@@ -57,8 +59,20 @@ public class MesaServiceImpl implements MesaService {
         return new MesaDto(mesaRepository.save(mesaEntity));
     }
 
-    public RestauranteEntity getRestaurante(Long id){
+    @Override
+    public void deleteMesa(Long id) {
+        mesaRepository.deleteById(id);
+    }
+
+    public RestauranteEntity getRestaurante(Long id) {
         return restauranteService.getRestauranteEntity(id);
     }
+
+    public void verificaExistenciaNumMesa(Integer numMesa, RestauranteEntity restauranteEntity) {
+        if (mesaRepository.existsByNumeroAndRestaurante(numMesa, restauranteEntity)) {
+            throw new IllegalArgumentException("ERRO: Já existe uma mesa com esse número no restaurante");
+        }
+    }
+
 
 }

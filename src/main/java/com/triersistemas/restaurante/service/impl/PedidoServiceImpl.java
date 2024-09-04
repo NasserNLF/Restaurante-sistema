@@ -51,6 +51,11 @@ public class PedidoServiceImpl implements PedidoService {
         return new PedidoDto(pedidoRepository.save(pedidoEntity.putRegistro(pedidoDto, reserva)));
     }
 
+    @Override
+    public void deletePedido(Long id) {
+        pedidoRepository.deleteById(id);
+    }
+
     public ReservaEntity getReserva(Long id) {
         return reservaService.getReservaEntity(id);
     }

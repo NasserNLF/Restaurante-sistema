@@ -17,7 +17,7 @@ public class MesaController {
 
     //POST
     @PostMapping
-    public ResponseEntity<?> postMesa(@RequestBody MesaDto mesaDto){
+    public ResponseEntity<?> postMesa(@RequestBody MesaDto mesaDto) {
         try {
             return ResponseEntity.ok(mesaService.postMesa(mesaDto));
         } catch (Exception e) {
@@ -27,7 +27,7 @@ public class MesaController {
 
     //GETTER
     @GetMapping
-    public ResponseEntity<?> getAllMesa(){
+    public ResponseEntity<?> getAllMesa() {
         try {
             return ResponseEntity.ok(mesaService.getAllMesas());
         } catch (Exception e) {
@@ -36,7 +36,7 @@ public class MesaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getMesa(@PathVariable Long id){
+    public ResponseEntity<?> getMesa(@PathVariable Long id) {
         try {
             return ResponseEntity.ok(mesaService.getMesa(id));
         } catch (Exception e) {
@@ -46,7 +46,7 @@ public class MesaController {
 
     //PUT
     @PutMapping("/{id}")
-    public ResponseEntity<?> putMesa(@PathVariable Long id, @RequestBody MesaDto mesaDto){
+    public ResponseEntity<?> putMesa(@PathVariable Long id, @RequestBody MesaDto mesaDto) {
         try {
             return ResponseEntity.ok(mesaService.putMesa(id, mesaDto));
         } catch (Exception e) {
@@ -54,6 +54,11 @@ public class MesaController {
         }
     }
 
+    //Delete
+    @DeleteMapping("/{id}")
+    public void deleteMesa(@PathVariable Long id) {
+        mesaService.deleteMesa(id);
+    }
 
 
 }
