@@ -27,7 +27,6 @@ public class ClienteEntity extends PessoaEntity {
     private LocalDate dataCadastro;
 
     @Column(nullable = false)
-
     private Boolean flgBloqueado;
 
     @ManyToOne
@@ -41,7 +40,7 @@ public class ClienteEntity extends PessoaEntity {
         this.nome = clienteDto.getNome();
         this.sobrenome = clienteDto.getSobrenome();
         this.cpf = clienteDto.getCpf();
-        this.dataNascimento = validaIdade(clienteDto.getDataNascimento());
+        this.dataNascimento = clienteDto.getDataNascimento();
         this.sexo = clienteDto.getSexo();
         this.telefone = clienteDto.getTelefone();
         this.id = clienteDto.getId();
@@ -53,7 +52,7 @@ public class ClienteEntity extends PessoaEntity {
     public ClienteEntity putRegistro(ClienteDto clienteDto, RestauranteEntity restauranteEntity) {
         this.nome = clienteDto.getNome();
         this.sobrenome = clienteDto.getSobrenome();
-        this.dataNascimento = validaIdade(clienteDto.getDataNascimento());
+        this.dataNascimento = clienteDto.getDataNascimento();
         this.sexo = clienteDto.getSexo();
         this.telefone = clienteDto.getTelefone();
         this.flgBloqueado = (clienteDto.getFlgBloqueado() != null) ? clienteDto.getFlgBloqueado() : false;
@@ -63,13 +62,6 @@ public class ClienteEntity extends PessoaEntity {
 
     }
 
-    private LocalDate validaIdade(LocalDate dataNascimento) {
-        Period periodo = Period.between(LocalDate.now(), dataNascimento);
-        if (periodo.getYears() > 100 || periodo.getYears() < 12) {
-            throw new IllegalArgumentException("ERRO: A pessoa não pdoe ter mais de 100 anos e menos de 12");
-        }
 
-        return dataNascimento;
-    }
 
 }

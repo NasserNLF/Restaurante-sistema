@@ -65,9 +65,9 @@ public class PedidoServiceImpl implements PedidoService {
         return reservaService.getReservaEntity(id);
     }
 
-    public void validaReserva(ReservaEntity reservaEntity) {
+    private void validaReserva(ReservaEntity reservaEntity) {
         if (reservaEntity.getDataReserva().isBefore(LocalDate.now()) && reservaEntity.getStatus().compareTo(StatusReservaEnum.AGENDADA) != 0) {
-            throw new IllegalArgumentException("ERRO: Você não inserir pedidos nessa reserva!");
+            throw new IllegalArgumentException("ERRO: Você não pode inserir pedidos nessa reserva!");
         }
     }
 

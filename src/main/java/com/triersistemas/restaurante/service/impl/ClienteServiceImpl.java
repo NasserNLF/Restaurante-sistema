@@ -9,6 +9,8 @@ import com.triersistemas.restaurante.service.RestauranteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 @Service
@@ -22,7 +24,12 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public ClienteDto postCliente(ClienteDto clienteDto) {
+
+        adequaCpf(clienteDto);
+        validaIdade(clienteDto.getDataNascimento());
+
         var restaurante = getRestaurante(clienteDto.getRestauranteId());
+
 
         var cliente = new ClienteEntity(clienteDto, restaurante);
 
@@ -43,6 +50,10 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public ClienteDto putCliente(Long id, ClienteDto clienteDto) {
+
+        adequaCpf(clienteDto);
+        validaIdade(clienteDto.getDataNascimento());
+
         var clienteEntity = getClienteEntity(id);
         var restauranteEntity = getRestaurante(clienteDto.getRestauranteId());
 
@@ -66,5 +77,22 @@ public class ClienteServiceImpl implements ClienteService {
         return restauranteService.getRestauranteEntity(id);
     }
 
+
+    // Validações
+    private void validaIdade(LocalDate dataNascimento) {
+        Period periodo = Period.between(LocalDate.now(), dataNascimento);
+        if (periodo.getYears() > 100 || periodo.getYears() < 12) {
+            throw new IllegalArgumentException("ERRO: A pessoa não pdoe ter mais de 100 anos e menos de 12");
+        }
+    }
+
+    private void adequaCpf(ClienteDto clienteDto){
+
+        clienteDto.setCpf(clienteDto.getCpf().replaceAll("\\D", ""));
+
+        if (clienteDto.getCpf().length() != 11){
+            throw new IllegalArgumentException("ERRO: O CPF deve ter 11 números!");
+        }
+    }
 
 }

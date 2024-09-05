@@ -2,6 +2,7 @@ package com.triersistemas.restaurante.service;
 
 import com.triersistemas.restaurante.dto.RestauranteDto;
 import com.triersistemas.restaurante.entity.RestauranteEntity;
+import org.springframework.data.domain.Page;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -20,5 +21,7 @@ public interface RestauranteService {
     RestauranteDto putRestaurante(Long id, RestauranteDto restauranteDto);
 
     void deleteRestaurante(Long id);
+
+    Page<RestauranteDto> getFaturamentoDia(Long idRestaurante, LocalDate data);
     
 }

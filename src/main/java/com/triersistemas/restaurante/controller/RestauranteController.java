@@ -16,8 +16,12 @@ public class RestauranteController {
     public RestauranteService restauranteService;
 
     @PostMapping
-    public RestauranteDto postRestaurante(@RequestBody RestauranteDto restauranteDto) {
-        return restauranteService.postRestaurante(restauranteDto);
+    public ResponseEntity<?> postRestaurante(@RequestBody RestauranteDto restauranteDto) {
+        try{
+            return ResponseEntity.ok(restauranteService.postRestaurante(restauranteDto));
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @GetMapping

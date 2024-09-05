@@ -17,6 +17,9 @@ public class RestauranteServiceImpl implements RestauranteService {
 
     @Override
     public RestauranteDto postRestaurante(RestauranteDto restauranteDto) {
+
+        adequaCnpj(restauranteDto);
+
         var restauranteEntity = restauranteRepository.save(new RestauranteEntity(restauranteDto));
 
         return new RestauranteDto(restauranteEntity);
@@ -34,6 +37,9 @@ public class RestauranteServiceImpl implements RestauranteService {
 
     @Override
     public RestauranteDto putRestaurante(Long id, RestauranteDto restauranteDto) {
+
+        adequaCnpj(restauranteDto);
+
         var restauranteEntity = getRestauranteEntity(id);
 
         restauranteRepository.save(restauranteEntity.putRegistro(restauranteDto));
@@ -52,4 +58,16 @@ public class RestauranteServiceImpl implements RestauranteService {
 
         return restauranteEntity;
     }
+
+    //Validações
+    public void adequaCnpj(RestauranteDto restauranteDto){
+        restauranteDto.setCnpj(restauranteDto.getCnpj().replaceAll("\\D" , ""));
+
+        if (restauranteDto.getCnpj().length() != 14){
+            throw new IllegalArgumentException("ERRO: O CNPJ precisa ter 14 números!");
+        }
+    }
+
+
+
 }

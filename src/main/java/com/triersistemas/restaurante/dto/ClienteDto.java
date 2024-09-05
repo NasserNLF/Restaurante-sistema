@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -15,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 public class ClienteDto extends PessoaDto {
     private Long id;
 
@@ -26,7 +28,12 @@ public class ClienteDto extends PessoaDto {
     private Long restauranteId;
 
     public ClienteDto(ClienteEntity clienteEntity) {
-        super(clienteEntity.getNome(), clienteEntity.getCpf(), clienteEntity.getSobrenome(), clienteEntity.getDataNascimento(), clienteEntity.getSexo(), clienteEntity.getTelefone());
+        this.nome = clienteEntity.getNome();
+        this.cpf = clienteEntity.getCpf();
+        this.sobrenome = clienteEntity.getSobrenome();
+        this.dataNascimento = clienteEntity.getDataNascimento();
+        this.sexo = clienteEntity.getSexo();
+        this.telefone = clienteEntity.getTelefone();
         this.id = clienteEntity.getId();
         this.dataCadastro = clienteEntity.getDataCadastro();
         this.quantidadeReservas = clienteEntity.getReservas().size();

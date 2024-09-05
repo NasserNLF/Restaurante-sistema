@@ -6,12 +6,14 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 public class RestauranteDto {
     private Long id;
     private String nome;
@@ -27,4 +29,7 @@ public class RestauranteDto {
         this.tipoComida = restauranteEntity.getTipoComida();
     }
 
+
 }
+
+
