@@ -1,6 +1,8 @@
 package com.triersistemas.restaurante.service.impl;
 
+import com.triersistemas.restaurante.dto.PedidoMaiorClienteDto;
 import com.triersistemas.restaurante.dto.ReservaDto;
+import com.triersistemas.restaurante.dto.ReservaVlrTotalDto;
 import com.triersistemas.restaurante.entity.ClienteEntity;
 import com.triersistemas.restaurante.entity.MesaEntity;
 import com.triersistemas.restaurante.entity.ReservaEntity;
@@ -10,6 +12,8 @@ import com.triersistemas.restaurante.service.ClienteService;
 import com.triersistemas.restaurante.service.MesaService;
 import com.triersistemas.restaurante.service.ReservaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -80,6 +84,17 @@ public class ReservaServiceImpl implements ReservaService {
     public void deleteReserva(Long id) {
         reservaRepository.deleteById(id);
     }
+
+    @Override
+    public ReservaVlrTotalDto findVlrTotalByReserva(Long idRestaurante, Long idReserva) {
+        return reservaRepository.findVlrTotalByReserva(idRestaurante, idReserva);
+    }
+
+    @Override
+    public Page<ReservaDto> findByObservacao(Pageable pageable, Long idRestaurante, String descricao) {
+        return reservaRepository.findByObservacao(pageable, idRestaurante, descricao);
+    }
+
 
     public ClienteEntity getCliente(Long id) {
         return clienteService.getClienteEntity(id);

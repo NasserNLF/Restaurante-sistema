@@ -1,12 +1,15 @@
 package com.triersistemas.restaurante.service.impl;
 
 import com.triersistemas.restaurante.dto.ClienteDto;
+import com.triersistemas.restaurante.dto.ClienteReservasValores;
 import com.triersistemas.restaurante.entity.ClienteEntity;
 import com.triersistemas.restaurante.entity.RestauranteEntity;
 import com.triersistemas.restaurante.repository.ClienteRepository;
 import com.triersistemas.restaurante.service.ClienteService;
 import com.triersistemas.restaurante.service.RestauranteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -49,15 +52,12 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public ClienteDto putCliente(Long id, ClienteDto clienteDto) {
+    public ClienteDto putCliente(Long id) {
 
-        adequaCpf(clienteDto);
-        validaIdade(clienteDto.getDataNascimento());
 
         var clienteEntity = getClienteEntity(id);
-        var restauranteEntity = getRestaurante(clienteDto.getRestauranteId());
 
-        clienteEntity.putRegistro(clienteDto, restauranteEntity);
+        clienteEntity.putRegistro();
         clienteRepository.save(clienteEntity);
 
         return new ClienteDto(clienteEntity);
@@ -73,6 +73,11 @@ public class ClienteServiceImpl implements ClienteService {
         clienteRepository.deleteById(id);
     }
 
+    @Override
+    public Page<ClienteReservasValores> findReservasAndValoresByCliente(Pageable pageable, Long idRestaurante) {
+        return clienteRepository.findReservasAndValoresByCliente(pageable, idRestaurante);
+    }
+
     public RestauranteEntity getRestaurante(Long id) {
         return restauranteService.getRestauranteEntity(id);
     }
@@ -80,17 +85,17 @@ public class ClienteServiceImpl implements ClienteService {
 
     // Validações
     private void validaIdade(LocalDate dataNascimento) {
-        Period periodo = Period.between(LocalDate.now(), dataNascimento);
+        Period periodo = Period.between(dataNascimento, LocalDate.now());
         if (periodo.getYears() > 100 || periodo.getYears() < 12) {
             throw new IllegalArgumentException("ERRO: A pessoa não pdoe ter mais de 100 anos e menos de 12");
         }
     }
 
-    private void adequaCpf(ClienteDto clienteDto){
+    private void adequaCpf(ClienteDto clienteDto) {
 
         clienteDto.setCpf(clienteDto.getCpf().replaceAll("\\D", ""));
 
-        if (clienteDto.getCpf().length() != 11){
+        if (clienteDto.getCpf().length() != 11) {
             throw new IllegalArgumentException("ERRO: O CPF deve ter 11 números!");
         }
     }

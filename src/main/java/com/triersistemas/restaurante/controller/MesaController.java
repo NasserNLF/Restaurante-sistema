@@ -4,6 +4,8 @@ import com.triersistemas.restaurante.dto.FuncionarioDto;
 import com.triersistemas.restaurante.dto.MesaDto;
 import com.triersistemas.restaurante.service.MesaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -68,5 +70,13 @@ public class MesaController {
         mesaService.deleteMesa(id);
     }
 
+    @GetMapping("/disponiveis")
+    public Page<MesaDto> getMesasDisponiveis(@RequestParam(defaultValue = "10", required = false) Integer size,
+                                             @RequestParam(defaultValue = "0", required = false) Integer page,
+                                             @RequestParam Long restauranteId,
+                                             @RequestParam Integer numPessoas,
+                                             @RequestParam LocalDate data) {
+        return mesaService.getMesasDisponiveis(Pageable.ofSize(size).withPage(page), restauranteId, numPessoas, data);
+    }
 
 }

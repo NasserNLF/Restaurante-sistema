@@ -1,10 +1,11 @@
 package com.triersistemas.restaurante.repository;
 
 import com.triersistemas.restaurante.dto.MesaDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public interface MesaRepositoryCustom {
-    List<MesaDto> getMesasDisponiveis(Long restauranteId, Integer numPessoas, LocalDate data);
+    Page<MesaDto> getMesasDisponiveis(Pageable pageable, Long restauranteId, Integer numPessoas, LocalDate data);
 }

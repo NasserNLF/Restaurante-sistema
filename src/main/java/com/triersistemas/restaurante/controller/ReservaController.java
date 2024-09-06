@@ -2,9 +2,12 @@ package com.triersistemas.restaurante.controller;
 
 import com.triersistemas.restaurante.dto.PedidoDto;
 import com.triersistemas.restaurante.dto.ReservaDto;
+import com.triersistemas.restaurante.dto.ReservaVlrTotalDto;
 import com.triersistemas.restaurante.enuns.StatusReservaEnum;
 import com.triersistemas.restaurante.service.ReservaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -61,5 +64,17 @@ public class ReservaController {
         reservaService.deleteReserva(id);
     }
 
+    @GetMapping("/valorTotal")
+    public ReservaVlrTotalDto getVlrTotalReserva(@RequestParam Long idRestaurante, @RequestParam Long idReserva) {
+        return reservaService.findVlrTotalByReserva(idRestaurante, idReserva);
+    }
+
+    @GetMapping("/observacao")
+    Page<ReservaDto> findByObservacao(@RequestParam(defaultValue = "10", required = false) Integer size,
+                                      @RequestParam(defaultValue = "0", required = false) Integer page,
+                                      @RequestParam Long idRestaurante,
+                                      @RequestParam String observacao) {
+        return reservaService.findByObservacao(Pageable.ofSize(size).withPage(page), idRestaurante, observacao);
+    }
 
 }

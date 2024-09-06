@@ -49,19 +49,12 @@ public class ClienteEntity extends PessoaEntity {
         this.restaurante = restauranteEntity;
     }
 
-    public ClienteEntity putRegistro(ClienteDto clienteDto, RestauranteEntity restauranteEntity) {
-        this.nome = clienteDto.getNome();
-        this.sobrenome = clienteDto.getSobrenome();
-        this.dataNascimento = clienteDto.getDataNascimento();
-        this.sexo = clienteDto.getSexo();
-        this.telefone = clienteDto.getTelefone();
-        this.flgBloqueado = (clienteDto.getFlgBloqueado() != null) ? clienteDto.getFlgBloqueado() : false;
-        this.restaurante = restauranteEntity;
+    public ClienteEntity putRegistro() {
+        this.flgBloqueado = true;
 
         return this;
 
     }
-
 
 
 }

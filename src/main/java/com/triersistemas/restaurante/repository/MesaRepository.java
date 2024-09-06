@@ -9,10 +9,8 @@ import org.springframework.data.repository.query.Param;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface MesaRepository extends JpaRepository<MesaEntity, Long>, MesaRepositoryCustom{
+public interface MesaRepository extends JpaRepository<MesaEntity, Long>, MesaRepositoryCustom {
     Boolean existsByNumeroAndRestaurante(Integer numero, RestauranteEntity restauranteEntity);
 
-    @Query("SELECT m FROM mesa m WHERE m.capacidadePessoas >= :qtdPessoas AND m.restaurante.id = :restauranteId AND m.id NOT IN (SELECT r.mesa.id FROM reserva r WHERE r.dataReserva = :data)")
-    List<MesaEntity> findMesasDisponiveis(@Param("data") LocalDate data, @Param("qtdPessoas") Integer qtdPessoas, @Param("restauranteId") Long idRestaurante);
 }
 

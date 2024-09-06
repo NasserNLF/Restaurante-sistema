@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface ReservaRepository extends JpaRepository<ReservaEntity, Long> {
+public interface ReservaRepository extends JpaRepository<ReservaEntity, Long>, ReservaRepositoryCustom {
     List<ReservaEntity> findAllByClienteAndStatusAndDataReservaBetween(ClienteEntity clienteEntity, StatusReservaEnum status, LocalDate dataAtual, LocalDate dataFim);
 
     List<ReservaEntity> findAllByClienteAndStatus(ClienteEntity clienteEntity, StatusReservaEnum status);

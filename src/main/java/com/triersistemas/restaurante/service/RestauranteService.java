@@ -1,13 +1,14 @@
 package com.triersistemas.restaurante.service;
 
+import com.triersistemas.restaurante.dto.ReservaDto;
 import com.triersistemas.restaurante.dto.RestauranteDto;
+import com.triersistemas.restaurante.dto.RestauranteFaturamentoDiaDto;
 import com.triersistemas.restaurante.entity.RestauranteEntity;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 
 public interface RestauranteService {
     RestauranteDto postRestaurante(RestauranteDto restauranteDto);
@@ -22,6 +23,11 @@ public interface RestauranteService {
 
     void deleteRestaurante(Long id);
 
-    Page<RestauranteDto> getFaturamentoDia(Long idRestaurante, LocalDate data);
-    
+    RestauranteFaturamentoDiaDto getFaturamentoDia(Long idRestaurante, LocalDate data);
+
+    RestauranteFaturamentoDiaDto getMaiorFaturamentoMes(Long idRestaurante, Integer mes);
+
+    Page<RestauranteDto> findAllRestaurantesPage(Pageable pageable, String nome);
+
+
 }

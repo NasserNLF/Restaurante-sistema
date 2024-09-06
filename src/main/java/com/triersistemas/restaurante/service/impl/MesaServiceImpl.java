@@ -7,6 +7,8 @@ import com.triersistemas.restaurante.repository.MesaRepository;
 import com.triersistemas.restaurante.service.MesaService;
 import com.triersistemas.restaurante.service.RestauranteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -51,12 +53,6 @@ public class MesaServiceImpl implements MesaService {
     }
 
 
-    //TODO Perguntar amanhã aula sobre como fazer subselect
-    @Override
-    public List<MesaDto> getMesasDisponiveisByDataByQtdPessoas(LocalDate data, Integer qtdPessoas, Long idRestaurante) {
-        return mesaRepository.findMesasDisponiveis(data, qtdPessoas, idRestaurante).stream().map(MesaDto::new).toList();
-    }
-
     @Override
     public MesaDto putMesa(Long id, MesaDto mesaDto) {
         var restauranteEntity = getRestaurante(mesaDto.getIdRestaurante());
@@ -70,6 +66,11 @@ public class MesaServiceImpl implements MesaService {
     @Override
     public void deleteMesa(Long id) {
         mesaRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<MesaDto> getMesasDisponiveis(Pageable pageable, Long restauranteId, Integer numPessoas, LocalDate data) {
+        return mesaRepository.getMesasDisponiveis(pageable, restauranteId, numPessoas, data);
     }
 
     public RestauranteEntity getRestaurante(Long id) {

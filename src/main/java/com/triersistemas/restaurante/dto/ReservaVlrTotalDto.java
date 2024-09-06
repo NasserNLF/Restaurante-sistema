@@ -1,19 +1,19 @@
 package com.triersistemas.restaurante.dto;
 
+
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
-
 
 @AllArgsConstructor
 @NoArgsConstructor
-public class RestauranteFauramentoDiaDto {
+@Getter
+public class ReservaVlrTotalDto {
 
-    private Long idRestaurante;
-    private LocalDate data;
-    private BigDecimal faturamento;
+    private Long idReserva;
+    private BigDecimal vlrTotal;
 
 
 }

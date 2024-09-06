@@ -1,6 +1,7 @@
 package com.triersistemas.restaurante.service.impl;
 
 import com.triersistemas.restaurante.dto.PedidoDto;
+import com.triersistemas.restaurante.dto.PedidoMaiorClienteDto;
 import com.triersistemas.restaurante.entity.PedidoEntity;
 import com.triersistemas.restaurante.entity.ReservaEntity;
 import com.triersistemas.restaurante.enuns.StatusReservaEnum;
@@ -8,8 +9,11 @@ import com.triersistemas.restaurante.repository.PedidoRepository;
 import com.triersistemas.restaurante.service.PedidoService;
 import com.triersistemas.restaurante.service.ReservaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -59,6 +63,21 @@ public class PedidoServiceImpl implements PedidoService {
     @Override
     public void deletePedido(Long id) {
         pedidoRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<PedidoMaiorClienteDto> findMaiorPedidoByCliente(Pageable pageable, Long idRestaurante) {
+        return pedidoRepository.findMaiorPedidoByCliente(pageable, idRestaurante);
+    }
+
+    @Override
+    public Page<PedidoDto> findPedido(Pageable pageable, Long idRestaurante, LocalDate date, BigDecimal valor, StatusReservaEnum status, Long idCliente) {
+        return pedidoRepository.findPedido(pageable, idRestaurante, date, valor, status, idCliente);
+    }
+
+    @Override
+    public Page<PedidoDto> findAllPedidosPage(Pageable pageable, String descricao, Long idRestaurante) {
+        return pedidoRepository.findAllPedidosPage(pageable, descricao, idRestaurante);
     }
 
     public ReservaEntity getReserva(Long id) {
