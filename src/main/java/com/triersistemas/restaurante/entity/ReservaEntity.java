@@ -47,23 +47,14 @@ public class ReservaEntity {
         this.id = reservaDto.getId();
         this.cliente = cliente;
         this.mesa = mesaEntity;
-        this.dataReserva = validaDataReserva(reservaDto.getDataReserva());
+        this.dataReserva = reservaDto.getDataReserva();
         this.quantidadePessoas = reservaDto.getQuantidadePessoas();
         this.status = reservaDto.getStatus();
         this.observacao = reservaDto.getObservacao();
     }
 
-    public ReservaEntity putRegistro(StatusReservaEnum status) {
+    public void putRegistro(StatusReservaEnum status) {
         this.status = status;
-
-        return this;
-    }
-
-    private LocalDate validaDataReserva(LocalDate dataReserva) {
-        if (dataReserva.isBefore(LocalDate.now())) {
-            throw new IllegalArgumentException("ERRO: A data da reserva não pode ser feita no passado");
-        }
-        return dataReserva;
     }
 
 

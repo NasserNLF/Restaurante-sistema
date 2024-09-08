@@ -30,14 +30,16 @@ public class ReservaServiceImpl implements ReservaService {
 
     @Autowired
     private MesaService mesaService;
-
-
+    
     @Override
     public ReservaDto postReserva(ReservaDto reservaDto) {
+
+        validaDataReserva(reservaDto.getDataReserva());
 
         var cliente = getCliente(reservaDto.getClienteId());
 
         validaQtdReservasCanceladasCliente(cliente);
+        validaInadimplencia(cliente);
 
         var mesa = getMesa(reservaDto.getMesaId());
 
@@ -143,6 +145,12 @@ public class ReservaServiceImpl implements ReservaService {
     public void validaDataConclusao(LocalDate dataReserva) {
         if (dataReserva.isEqual(LocalDate.now()) || dataReserva.isEqual(LocalDate.now().plusDays(1))) {
             throw new IllegalArgumentException("ERRO: Uma reserva só pode ser concluída no dia ou no dia posterior");
+        }
+    }
+
+    public void validaDataReserva(LocalDate dataReserva) {
+        if (dataReserva.isBefore(LocalDate.now())) {
+            throw new IllegalArgumentException("ERRO: A data da reserva não pode ser feita no passado");
         }
     }
 
